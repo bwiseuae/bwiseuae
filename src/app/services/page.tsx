@@ -1,0 +1,411 @@
+"use client";
+
+import React, { useState } from "react";
+import {
+  Building2,
+  FileText,
+  Users,
+  CreditCard,
+  Percent,
+  TrendingUp,
+  Award,
+  ShieldCheck,
+  Zap,
+  Clock,
+  CheckCircle,
+  FileCheck,
+  UserCheck,
+  Tag,
+  FileCode,
+  Headphones,
+  LayoutDashboard,
+  MapPin,
+  Scale,
+} from "lucide-react";
+
+import PageHero from "@/components/PageHero";
+import SectionHeader from "@/components/SectionHeader";
+import ServiceCard from "@/components/ServiceCard";
+import FeatureCard from "@/components/FeatureCard";
+import StatisticsCards from "@/components/StatisticsCards";
+import ProcessSteps from "@/components/ProcessSteps";
+import CTASection from "@/components/CTASection";
+
+const servicesList = [
+  // Core Business Setup Services
+  {
+    title: "Company Formation",
+    description: "End-to-end formation across Dubai Mainland, 45+ Freezones, or UAE Offshore jurisdictions, custom-tailored to your exact business goals.",
+    icon: Building2,
+    benefits: "Full legal compliance and structures optimized for maximum tax savings.",
+    features: [
+      "Trade name registration & approvals",
+      "Drafting Memorandum of Association (MOA)",
+      "Mainland & Freezone corporate registration",
+      "100% legal ownership structuring support",
+    ],
+    category: "formation",
+  },
+  {
+    title: "Business Licensing",
+    description: "Acquire commercial, professional, industrial, or tourism trade licenses with complete regulatory approvals from governmental departments.",
+    icon: FileText,
+    benefits: "Avoid delays and license rejections with expert pre-evaluation checksheets.",
+    features: [
+      "License type selection (Commercial, Service, Trade)",
+      "External approvals coordination (Dubai custom, RTA, RERA approval etc.)",
+      "Trade license amendments and renewals",
+      "Special activity permissions & compliance audits",
+    ],
+    category: "formation",
+  },
+  {
+    title: "Visa Services",
+    description: "Manage residency visas, investor gold visas, family sponsorship, and corporate employee work permits with absolute convenience.",
+    icon: Users,
+    benefits: "Swift processing and hassle-free VIP medical fitness testing support.",
+    features: [
+      "10-Year UAE Gold Visa processing",
+      "Investor & Partner visa arrangements",
+      "Employee work entry permits & residency stamping",
+      "Family and domestic staff visa sponsorships",
+    ],
+    category: "formation",
+  },
+  {
+    title: "Bank Account Assistance",
+    description: "Get introduced and secure business accounts with top tier local and international banking institutions operating inside the UAE.",
+    icon: CreditCard,
+    benefits: "Bypassing complex AML/compliance screening with pre-vetted dossiers.",
+    features: [
+      "Pre-evaluation of corporate file & shareholdings",
+      "Introduction to premier UAE corporate banks",
+      "Multi-currency bank account setup support",
+      "Digital corporate banking solutions configuration",
+    ],
+    category: "formation",
+  },
+  {
+    title: "VAT & Tax Registration",
+    description: "Full tax registration, accounting alignment, corporate tax onboarding, and monthly VAT reporting under the Federal Tax Authority (FTA).",
+    icon: Percent,
+    benefits: "Mitigate expensive penalties and ensure total tax compliance.",
+    features: [
+      "FTA VAT registration & account setup",
+      "Corporate Tax registration and filing preparations",
+      "Tax accounting, ledger alignment & advice",
+      "Accounting and Bookkeeping",
+    ],
+    category: "formation",
+  },
+  {
+    title: "Business Advisory",
+    description: "Strategic consulting, feasibility analysis, local market intelligence, brand localization, and corporate restructuring support.",
+    icon: TrendingUp,
+    benefits: "Position your brand for scalability and strategic profitability in the Middle East.",
+    features: [
+      "Market feasibility & expansion modeling",
+      "Local corporate sponsor arrangements (where applicable)",
+      "M&A, liquidation & restructuring consulting",
+      "Corporate compliance & legal protection strategies",
+    ],
+    category: "formation",
+  },
+  {
+    title: "Power of Attorney & Notary",
+    description: "End-to-end support for drafting, notarizing through Dubai Courts, and securing MOFA attestations for individual and corporate legal authorizations.",
+    icon: FileCheck,
+    benefits: "Seamless legal authorization with complete compliance, confidentiality, and hassle-free document attestation.",
+    features: [
+      "General, Special, Property & Corporate POA drafting (English & Arabic)",
+      "Dubai Court notarization & legal translation assistance",
+      "MOFA (Ministry of Foreign Affairs) attestation guidance",
+      "End-to-end PRO document processing for individuals & companies",
+    ],
+    category: "formation",
+  },
+  {
+    title: "AML Compliance & goAML",
+    description: "Complete goAML registration, policy drafting, and regulatory framework setup for Designated Non-Financial Businesses and Professions (DNFBPs).",
+    icon: ShieldCheck,
+    benefits: "Protect your business from heavy penalties with full FIU regulatory compliance and tailored risk assessments.",
+    features: [
+      "Mandatory goAML system registration with UAE Financial Intelligence Unit (FIU)",
+      "Customized AML/CFT policy, framework & procedure preparation",
+      "Compliance Officer documentation & internal risk assessment",
+      "Specialized support for Real Estate, Accounting, Precious Metals & Corporate Services",
+    ],
+    category: "formation",
+  },
+
+  // 8 New Operational & Governance Service Cards
+  {
+    title: "ESTABLISHMENT CARD",
+    description: "Official corporate registration with GDRFA/MOHRE to establish your company file and unlock visa quota allocations.",
+    icon: FileCheck,
+    benefits: "Unlock corporate visa allocations and official registration with UAE immigration.",
+    features: [
+      "New Establishment Card application & issuing",
+      "Renewal & amendment of establishment files",
+      "Portal registration with GDRFA & MOHRE",
+      "Visa quota allocation management",
+    ],
+    category: "operational",
+  },
+  {
+    title: "IMMIGRATION CARD",
+    description: "Dedicated immigration file setup enabling seamless employee sponsorships, entry permit issuances, and residency processing.",
+    icon: UserCheck,
+    benefits: "Accelerate foreign workforce onboarding with verified immigration file registration.",
+    features: [
+      "E-Channel & immigration portal setup",
+      "Sponsor registration & file activation",
+      "Fast-track entry permit approvals",
+      "Ongoing immigration file compliance",
+    ],
+    category: "operational",
+  },
+  {
+    title: "TRADE NAME RESERVATION",
+    description: "Official trademark search, verification, and name reservation with the relevant UAE economic departments.",
+    icon: Tag,
+    benefits: "Secure your preferred brand identity quickly without regulatory rejections.",
+    features: [
+      "Trade name availability search & eligibility check",
+      "Official name reservation application",
+      "Pre-approval coordination with DED / Free Zone",
+      "Trade name certificate issuance",
+    ],
+    category: "operational",
+  },
+  {
+    title: "MOA / AOA DRAFTING",
+    description: "Professional drafting of Memorandum of Association (MOA) and Articles of Association (AOA) compliant with UAE Commercial Law.",
+    icon: FileCode,
+    benefits: "Protect shareholder rights with legal, watertight corporate documentation.",
+    features: [
+      "Customized MOA & AOA drafting (English & Arabic)",
+      "Shareholder agreement & capital structure setup",
+      "Public Notary & legal translation coordination",
+      "Amendments & addendums to existing agreements",
+    ],
+    category: "operational",
+  },
+  {
+    title: "DEDICATED RELATIONSHIP MANAGER",
+    description: "Personalized account management providing a single point of contact for all your business setup and operational needs.",
+    icon: Headphones,
+    benefits: "A single dedicated expert taking care of your operational overhead from start to finish.",
+    features: [
+      "Dedicated single point of contact",
+      "Priority handling for all government submissions",
+      "Direct liaisons with UAE municipal authorities",
+      "Proactive status updates & document tracking",
+    ],
+    category: "operational",
+  },
+  {
+    title: "ASCENTIUM PLATFORM ACCESS",
+    description: "Exclusive digital portal access allowing real-time tracking of applications, document storage, and compliance monitoring.",
+    icon: LayoutDashboard,
+    benefits: "24/7 digital visibility over your licenses, visa statuses, and corporate files.",
+    features: [
+      "Direct access to the Ascentium management portal",
+      "Cloud vault for secure company document storage",
+      "Real-time tracking for active applications",
+      "Automated license & visa renewal alerts",
+    ],
+    category: "operational",
+  },
+  {
+    title: "VIRTUAL & PHYSICAL OFFICE SOLUTIONS",
+    description: "Flexible workplace packages including Flexi-desks, virtual addresses, and physical office leases paired with official Ejari registration.",
+    icon: MapPin,
+    benefits: "Cost-effective workspace solutions fully compliant with UAE licensing rules.",
+    features: [
+      "Ejari registration & lease contract approval",
+      "Flexi-desk & co-working allocations",
+      "Dedicated physical office lease coordination",
+      "Virtual address setup for mainland & free zone",
+    ],
+    category: "operational",
+  },
+  {
+    title: "ONGOING COMPLIANCE SUPPORT",
+    description: "Continuous regulatory monitoring covering UBO declarations, ESR, goAML, and UAE corporate governance requirements.",
+    icon: Scale,
+    benefits: "Eliminate penalty risks through proactive legal and regulatory compliance monitoring.",
+    features: [
+      "Ultimate Beneficial Owner (UBO) declarations",
+      "Economic Substance Regulations (ESR) filings",
+      "goAML registration & AML/CFT framework setup",
+      "Periodic regulatory health checks & audits",
+    ],
+    category: "operational",
+  },
+];
+
+const serviceStats = [
+  {
+    icon: Zap,
+    number: "24 Hours",
+    label: "Average License SLA",
+  },
+  {
+    icon: CheckCircle,
+    number: "100%",
+    label: "Visa Success Rate",
+  },
+  {
+    icon: Clock,
+    number: "7 Days",
+    label: "Avg Bank Onboarding",
+  },
+  {
+    icon: Award,
+    number: "10+",
+    label: "Partner Freezones",
+  },
+];
+
+const benefitsList = [
+  {
+    title: "Vetted Professionals",
+    description: "Work directly with legal and corporate setup experts, bypassing intermediary agencies.",
+    icon: Award,
+  },
+  {
+    title: "Strict Confidentiality",
+    description: "We enforce strict security and NDA frameworks to safeguard all corporate files, intellectual property, and investor documents.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Zero Hidden Surcharges",
+    description: "Our quotes are fully itemized, showing administrative fees, government licensing rates, and consultancy rates upfront.",
+    icon: Percent,
+  },
+  {
+    title: "Speedy Execution SLA",
+    description: "We bypass standard processing backlogs through digital workflows and strong liaison ties with government departments.",
+    icon: Zap,
+  },
+];
+
+export default function ServicesPage() {
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const filteredServices = activeCategory === "all"
+    ? servicesList
+    : servicesList.filter((s) => s.category === activeCategory);
+
+  return (
+    <>
+      {/* Page Hero */}
+      <PageHero
+        title="Our Services"
+        description="End-to-end corporate solutions designed to launch, support, and scale your business inside the UAE."
+        breadcrumbs={[{ name: "Services" }]}
+      />
+
+      {/* Services Grid */}
+      <section className="py-24 sm:py-32 bg-alabaster relative overflow-hidden border-t border-neutral-200/50">
+        {/* Background soft radial glow */}
+        <div className="absolute top-0 right-0 w-[30%] h-[30%] bg-[radial-gradient(circle_at_top_right,rgba(197,168,128,0.04),transparent_70%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <SectionHeader
+            title="Comprehensive Corporate Solutions"
+            subtitle="Explore our specialized services designed to establish and manage your UAE corporate assets."
+            badge="Our Offerings"
+          />
+
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap justify-center items-center gap-3 mb-12">
+            {[
+              { id: "all", label: "All Services (16)" },
+              { id: "formation", label: "Core Setup & Advisory" },
+              { id: "operational", label: "Government & Compliance" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveCategory(tab.id)}
+                className={`px-5 py-2.5 rounded-full font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === tab.id
+                    ? "bg-charcoal text-alabaster shadow-md"
+                    : "bg-white text-slate-grey border border-neutral-200 hover:border-champagne-gold hover:text-charcoal"
+                  }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            {filteredServices.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                benefits={service.benefits}
+                features={service.features}
+                delay={index * 0.05}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Work With Us */}
+      <section className="py-32 bg-alabaster relative overflow-hidden border-t border-neutral-200/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <SectionHeader
+            title="The Open Business Difference"
+            subtitle="Why leading global brands and fast-growing startups trust us to establish their commercial footprint."
+            badge="Why Us"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-neutral-200/40 border-t border-b border-neutral-200/40 py-12">
+            {benefitsList.map((benefit, index) => (
+              <FeatureCard
+                key={index}
+                title={benefit.title}
+                description={benefit.description}
+                icon={benefit.icon}
+                delay={index * 0.1}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Delivery Statistics */}
+      <section className="py-32 bg-alabaster relative overflow-hidden border-t border-neutral-200/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <SectionHeader
+            title="Service Speed & Performance"
+            subtitle="Industry-leading turnaround times and metrics that define our setup efficiency."
+          />
+          <StatisticsCards stats={serviceStats} columns={4} />
+        </div>
+      </section>
+
+      {/* Process Overview (Timeline) */}
+      <section className="py-32 bg-alabaster relative overflow-hidden border-t border-neutral-200/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <SectionHeader
+            title="Our Simplified Setup Process"
+            subtitle="Five clear steps to complete your business formation and start corporate operations in Dubai."
+            badge="Process Workflow"
+          />
+          <ProcessSteps />
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <CTASection
+        title="Ready to Start Your Setup?"
+        subtitle="Speak with our setup experts for a comprehensive licensing quote and free consultation."
+      />
+    </>
+  );
+}
