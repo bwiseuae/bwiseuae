@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.buildwiseuae.com"),
   title: "Open Business in UAE | Business Setup & Company Formation in Dubai",
   description: "Launch your business in Dubai today. Premier company formation, residency visas, corporate bank accounts, VAT registration, and business advisory services in the UAE.",
   keywords: "business setup uae, company formation dubai, dubai freezone license, mainland company setup, open company dubai, residency visa uae, corporate bank account dubai",
