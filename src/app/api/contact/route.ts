@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     // Check if RESEND_API_KEY is defined.

@@ -43,6 +43,7 @@ export const metadata: Metadata = {
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 
 export default function RootLayout({
   children,
@@ -54,12 +55,13 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${inter.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg-warm font-sans text-text-dark selection:bg-luxury-gold/30 selection:text-primary-navy">
+      <body className="min-h-full flex flex-col bg-bg-warm font-sans text-text-dark selection:bg-luxury-gold/30 selection:text-primary-navy pb-16 md:pb-0">
         <Header />
         <main className="flex-grow">
           {children}
         </main>
         <Footer />
+        <MobileStickyCTA />
       </body>
     </html>
   );

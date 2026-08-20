@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,25 +91,25 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Right Action Button - Desktop */}
+          {/* Right Action Button - Desktop Phone CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/contact"
-              className="bg-charcoal text-alabaster hover:bg-champagne-gold hover:text-charcoal font-sans font-bold text-[10px] tracking-widest uppercase px-6 py-3 rounded-none transition-all duration-500 flex items-center gap-1.5 active:scale-95"
+            <a
+              href="tel:+971564410998"
+              className="bg-charcoal text-alabaster hover:bg-champagne-gold hover:text-charcoal font-sans font-bold text-xs tracking-wider uppercase px-5 py-2.5 rounded-sm transition-all duration-300 flex items-center gap-2 active:scale-95 group shadow-sm"
             >
-              Start Your Business
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
+              <Phone className="w-3.5 h-3.5 text-alabaster group-hover:text-charcoal transition-colors duration-300" />
+              <span>+971 56 441 0998</span>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <div className="flex md:hidden">
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
               className="inline-flex items-center justify-center p-2 rounded-none text-charcoal hover:text-champagne-gold focus:outline-none transition-colors"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -140,13 +140,14 @@ export default function Header() {
             );
           })}
           <div className="pt-6">
-            <Link
-              href="/contact"
+            <a
+              href="tel:+971564410998"
               onClick={() => setIsOpen(false)}
-              className="w-full bg-charcoal hover:bg-champagne-gold hover:text-charcoal text-alabaster text-center block font-sans font-bold text-xs tracking-widest uppercase py-4 rounded-none transition-all duration-300"
+              className="w-full bg-charcoal hover:bg-champagne-gold hover:text-charcoal text-alabaster text-center font-sans font-bold text-xs tracking-wider uppercase py-4 rounded-sm transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Start Your Business
-            </Link>
+              <Phone className="w-4 h-4" />
+              <span>+971 56 441 0998</span>
+            </a>
           </div>
         </div>
       </div>
