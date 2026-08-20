@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   description: "Launch your business in Dubai today. Premier company formation, residency visas, corporate bank accounts, VAT registration, and business advisory services in the UAE.",
   keywords: "business setup uae, company formation dubai, dubai freezone license, mainland company setup, open company dubai, residency visa uae, corporate bank account dubai",
   authors: [{ name: "Open Business in UAE" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Open Business in UAE | Business Setup & Company Formation",
     description: "Launch your business in Dubai today. Premier company formation, residency visas, corporate bank accounts, VAT registration, and business advisory services in the UAE.",
