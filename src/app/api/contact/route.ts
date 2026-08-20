@@ -105,11 +105,9 @@ export async function POST(request: Request) {
     `;
 
     // Email routing configuration (allows overriding via Vercel env vars while keeping default fallbacks)
-    const fromEmail = process.env.CONTACT_FROM_EMAIL || "Contact Form <onboarding@resend.dev>";
+    const fromEmail = process.env.CONTACT_FROM_EMAIL || "BuildWise <contact@buildwiseuae.com>";
     const toEmail = process.env.CONTACT_TO_EMAIL || "naaz@buildwiseuae.com";
 
-    // Note: By default, Resend sandbox/trial accounts can only send from onboarding@resend.dev
-    // to their registered account email address.
     const { error } = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
